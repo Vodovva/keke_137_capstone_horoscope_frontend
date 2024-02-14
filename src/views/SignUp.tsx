@@ -17,8 +17,7 @@ export default function SignUp({ flashMessage }: SignUpProps) {
         lastName: '',
         email: '',
         username: '',
-        password: '',
-        confirmPassword: ''
+        password: ''
     });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +37,7 @@ export default function SignUp({ flashMessage }: SignUpProps) {
         }
     }
 
-    const disableSubmit = userFormData.password.length < 5 || userFormData.password !== userFormData.confirmPassword
+    const disableSubmit = userFormData.password.length < 5
 
     return (
         <>
@@ -60,11 +59,7 @@ export default function SignUp({ flashMessage }: SignUpProps) {
 
                         <Form.Label>Password</Form.Label>
                         <Form.Control name='password' type='password' placeholder='Enter Password' value={userFormData.password} onChange={handleInputChange}/>
-
-                        <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control name='confirmPass' type='password' placeholder='Re-Enter Password' value={userFormData.confirmPassword} onChange={handleInputChange}/>
                         {disableSubmit && <Form.Text className='text-danger'>Your passwords must be at least 6 characters and match</Form.Text>}
-
                         <Button type='submit' variant='outline-primary' className='w-100 mt-3' disabled={disableSubmit}>Sign Up</Button>
                     </Form>
                 </Card.Body>

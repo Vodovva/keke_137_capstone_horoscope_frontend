@@ -3,15 +3,17 @@ import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
+import { UserType } from '../types';
 
 
 interface NavigationProps {
     isLoggedIn: boolean;
     handleClick: () => void;
+    loggedInUser: UserType | null
 }
 
 
-export default function Navigation ({ isLoggedIn, handleClick }:NavigationProps) {
+export default function Navigation ({ isLoggedIn, handleClick, loggedInUser }:NavigationProps) {
     return (
         <Navbar expand='lg' bg='dark' variant='dark'>
             <Container>
@@ -22,13 +24,15 @@ export default function Navigation ({ isLoggedIn, handleClick }:NavigationProps)
                         {isLoggedIn ? (
                             <>
                                 <Nav.Link as={Link} to='/horoscope'>Check Horoscope</Nav.Link>
-                                <Nav.Link as={Link} to='/login' onClick={handleClick}>Login</Nav.Link>
-                                <Nav.Link as={Link} to='/signup' onClick={handleClick}>Sign Up</Nav.Link>
+                                {/* <Nav.Link as={Link} to='/login'>Login</Nav.Link> */}
+                                {/* <Nav.Link as={Link} to='/signup'>SignUp</Nav.Link> */}
+                                <Nav.Link as={Link} to='/' onClick={handleClick}>Logout</Nav.Link>
+                                <Nav.Link as={Link} to={`/edit/${loggedInUser?.id}`}>User Profile</Nav.Link>
                             </>
                         ) : (
                             <>
-                                <Nav.Link as={Link} to='/signup'>Sign In</Nav.Link>
-                                <Nav.Link as={Link} to='/login'>Log In</Nav.Link>
+                                <Nav.Link as={Link} to='/signup'>SignUp</Nav.Link>
+                                <Nav.Link as={Link} to='/login'>Login</Nav.Link>
                             </>
                         )}
                     </Nav>

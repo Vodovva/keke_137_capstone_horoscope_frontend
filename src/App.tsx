@@ -54,7 +54,7 @@ export default function App() {
 
     return (
         <>
-        <Navigation isLoggedIn={true} handleClick={() => console.log('Clicked')} />
+        <Navigation isLoggedIn={isLoggedIn} handleClick={logUserOut} loggedInUser={loggedInUser} />
         <BannerComponent />
             <Container>
                         {/* {message && <AlertMessage message={message} category={category} flashMessage={flashMessage}/>} */}
@@ -64,7 +64,7 @@ export default function App() {
                             <Route path='/signup' element={<SignUp flashMessage={flashMessage} />} />
                             <Route path='/horoscope' element={<Horoscope />} />
                             {/* <Route path='/dashboard' element={<EditUser flashMessage={flashMessage} currentUser={loggedInUser} />} /> */}
-                            <Route path='/edit/:userId' element={<EditUser currentUser={loggedInUser} flashMessage={flashMessage} />} />
+                            <Route path='/edit/:userId' element={<EditUser currentUser={loggedInUser} logUserOut={logUserOut} flashMessage={flashMessage} />} />
                         </Routes>
             </Container>
         <Footer/>    

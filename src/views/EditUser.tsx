@@ -1,27 +1,28 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getUserId, editUserId, deleteUserId } from '../lib/apiWrapper';
-import { CategoryType, SignFormDataType, UserType, UserFormDataType } from '../types';
+import { CategoryType, UserType, UserFormDataType } from '../types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Modal from 'react-bootstrap/Modal';
+// import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-
+// import Logout from '../lib/apiWrapper'
 
 type EditUserProps = {
     currentUser: UserType|null,
     flashMessage: (message: string, category:CategoryType) => void;
+    logUserOut: () => void;
 }
 
-export default function EditUser({ currentUser, flashMessage }: EditUserProps) {
+export default function EditUser({ currentUser, flashMessage, logUserOut }: EditUserProps) {
     const { userId } = useParams();
     const navigate = useNavigate();
 
     const [userToEditData, setUserToEditData] = useState<Partial<UserFormDataType>>({username:'', email:'' })
-    const [showModal, setShowModal] = useState(false);
+    // const [showModal, setShowModal] = useState(false);
 
-    const openModal = () => setShowModal(true);
-    const closeModal = () => setShowModal(false);
+    // const openModal = () => setShowModal(true);
+    // const closeModal = () => setShowModal(false);
 
     useEffect( () => {
         async function getUser(){
@@ -58,13 +59,14 @@ export default function EditUser({ currentUser, flashMessage }: EditUserProps) {
         }
     }
 
-    const handleDeleteAccount = async () => {
+    const handleDeleteClick = async () => {
         const token = localStorage.getItem('token') || ''
         const response = await deleteUserId(token, userId!);
         if (response.error){
             flashMessage(response.error, 'danger')
         } else {
             flashMessage(response.data!, 'primary')
+            logUserOut()
             navigate('/')
         }
     }
@@ -79,7 +81,8 @@ export default function EditUser({ currentUser, flashMessage }: EditUserProps) {
                         <Form.Control name='username' value={userToEditData.username} onChange={handleInputChange} />
                         <Form.Label>Email</Form.Label>
                         <Form.Control name='email' value={userToEditData.email} onChange={handleInputChange} />
-                        <Button variant='success' className='mt-3 w-50' type='submit'>Edit Email</Button>
+                        <Button variant='success' className='mt-3 w-50' type='submit'>Update User Profile</Button>
+                        <Button variant='danger' className='mt-3 w-50' onClick={handleDeleteClick}>Delete Profile</Button>
                     </Form>
                 </Card.Body>
             </Card>
