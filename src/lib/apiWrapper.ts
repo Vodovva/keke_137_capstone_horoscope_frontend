@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TokenType, UserFormDataType, UserType, SignType, SignFormDataType } from '../types';
+import { TokenType, UserFormDataType, UserType} from '../types';
 
 
 const horoscopeUrl: string  = 'https://horoscope-app-api.vercel.app/api/v1/get-horoscope';
