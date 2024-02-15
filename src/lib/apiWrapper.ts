@@ -94,21 +94,21 @@ async function getMe(token:string): Promise<APIResponse<UserType>> {
 }
 
 
-async function getAllUser(): Promise<APIResponse<UserType[]>> {
-    let error;
-    let data;
-    try {
-        const response = await apiClientNoAuth().get(userEndpoint)
-        data = response.data
-    } catch(err) {
-        if (axios.isAxiosError(err)){
-            error = err.message
-        } else {
-            error = 'Something went wrong'
-        }
-    }
-    return { error, data }
-}
+// async function getAllUser(): Promise<APIResponse<UserType[]>> {
+//     let error;
+//     let data;
+//     try {
+//         const response = await apiClientNoAuth().get(userEndpoint)
+//         data = response.data
+//     } catch(err) {
+//         if (axios.isAxiosError(err)){
+//             error = err.message
+//         } else {
+//             error = 'Something went wrong'
+//         }
+//     }
+//     return { error, data }
+// }
 
 
 async function createuser(token:string, newUser:UserFormDataType): Promise<APIResponse<UserType>> {
