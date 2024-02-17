@@ -6,3 +6,9 @@ body {
   width: 100px
 }
 
+.gallery{
+  max-height: 500px;
+  max-width: max-content;
+  margin: auto;
+  /* object-fit: cover; */
+}
